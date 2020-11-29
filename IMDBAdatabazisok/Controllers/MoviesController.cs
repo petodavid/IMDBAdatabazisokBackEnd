@@ -73,11 +73,15 @@ namespace IMDBAdatabazisok.Controllers
             return new OkObjectResult(result);
         }
 
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] Movie movie)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new MovieQuery(Db);
+            var result = await query.updateMovie(id, movie);
+            return new OkObjectResult(result);
+        }
 
 
 
